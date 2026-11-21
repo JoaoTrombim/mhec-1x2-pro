@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#080d14"><meta name="description" content="MHEC-1X2 PRO 2.0 — terminal de análise quantitativa de futebol 1X2">
+  <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icon-192.png"><link rel="stylesheet" href="styles.css">
+  <title>MHEC-1X2 PRO</title>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark">M<span>H</span></div><div><div class="brand-name">MHEC<span> / 1X2 PRO</span></div><div class="brand-sub">QUANTITATIVE FOOTBALL TERMINAL <b>v2.0</b></div></div></div>
+      <div class="top-actions"><span id="connection" class="status-pill"><i></i> OFFLINE</span><button id="installBtn" class="icon-btn" hidden aria-label="Instalar aplicação">⇩</button><button id="menuBtn" class="avatar">M</button></div>
+    </header>
+    <div class="ticker"><span class="live-dot"></span> SYSTEM READY <span>•</span> 1X2 MARKET <span>•</span> LOCAL-FIRST ENGINE <span class="ticker-right" id="clock">--:--:--</span></div>
+    <nav class="tabs" aria-label="Navegação principal">
+      <button class="tab active" data-page="dashboard">▦ <span>Terminal</span></button><button class="tab" data-page="matches">⚽ <span>Jogos</span></button><button class="tab" data-page="analysis">⌁ <span>Análise</span></button><button class="tab" data-page="history">◷ <span>Histórico</span></button><button class="tab" data-page="system">⚙ <span>Sistema</span></button>
+    </nav>
+    <main>
+      <section id="page-dashboard" class="page active">
+        <div class="page-heading"><div><div class="eyebrow">OVERVIEW / 01</div><h1>Centro de comando</h1><p>Visão geral do motor quantitativo 1X2.</p></div><span class="date-chip" id="today">--</span></div>
+        <div class="hero-panel"><div class="hero-top"><span class="eyebrow">MHEC PROBABILITY ENGINE</span><span class="tag tag-amber">EXPERIMENTAL</span></div><div class="hero-main"><div><div class="hero-value">1X2</div><div class="hero-caption">MATCH OUTCOME ANALYTICS</div></div><div class="orb"><div class="orb-inner">M</div></div></div><div class="hero-foot"><span><i class="green-dot"></i> Motor local disponível</span><span>Sem feed em direto</span></div></div>
+        <div class="section-title"><h2>Indicadores do sistema</h2><span class="muted">LOCAL STORAGE</span></div>
+        <div class="metric-grid"><div class="metric"><span class="metric-label">ANÁLISES GUARDADAS</span><strong id="metricAnalyses">0</strong><small>neste dispositivo</small></div><div class="metric"><span class="metric-label">MODELO ATIVO</span><strong class="metric-text">POISSON / DC</strong><small>DC candidato experimental</small></div><div class="metric"><span class="metric-label">DADOS SINCRONIZADOS</span><strong class="metric-text" id="syncState">N/D</strong><small>sem feed configurado</small></div><div class="metric"><span class="metric-label">REDE</span><strong class="metric-text" id="networkState">OFFLINE</strong><small>estado da ligação</small></div></div>
+        <div class="section-title"><h2>Acesso rápido</h2><span class="muted">WORKSPACE</span></div>
+        <button class="action-card" data-goto="analysis"><span class="action-icon">⌁</span><span><b>Nova análise 1X2</b><small>Estimar probabilidades e avaliar odds</small></span><span class="chevron">›</span></button>
+        <button class="action-card" data-goto="history"><span class="action-icon">◷</span><span><b>Arquivo de análises</b><small>Consultar resultados guardados localmente</small></span><span class="chevron">›</span></button>
+        <div class="notice"><b>Nota metodológica</b><p>As estimativas são experimentais e dependem dos parâmetros introduzidos. Não existe ainda calibração OOS, validação histórica nem garantia de rentabilidade. “Sem aposta” é uma decisão válida.</p></div>
+      </section>
+      <section id="page-matches" class="page">
+        <div class="page-heading"><div><div class="eyebrow">FIXTURE INTELLIGENCE / 02</div><h1>Calendário de jogos</h1><p>Calendários e resultados das 13 competições configuradas.</p></div><span class="tag tag-amber">DATA FEED</span></div>
+        <div class="panel feed-panel">
+          <div class="feed-toolbar"><div><b>OPEN-MATCHDAY</b><small id="feedUpdated">Ainda não sincronizado</small></div><button id="syncMatches" class="primary-btn sync-btn">SINCRONIZAR <span>↻</span></button></div>
+          <div class="feed-filters"><button class="filter-btn active" data-filter="upcoming">Próximos</button><button class="filter-btn" data-filter="today">Hoje</button><button class="filter-btn" data-filter="all">Todos</button></div>
+          <div class="feed-meta"><span id="feedCount">0 jogos</span><span id="feedSourceState">A aguardar ligação</span></div>
+        </div>
+        <div id="matchList" class="match-list"><div class="empty-state"><span>⚽</span><b>Calendário por sincronizar</b><small>Com internet, toca em Sincronizar para importar os jogos.</small></div></div>
+        <div class="notice"><b>Limitações da fonte</b><p>Dados gratuitos para uso informativo não comercial. Atualização anunciada diariamente, não em direto. Não inclui odds, xG, lesões ou alinhamentos. Os horários são apresentados conforme a fonte e podem não corresponder à hora local portuguesa.</p></div>
+      </section>
+      <section id="page-analysis" class="page">
+        <div class="page-heading"><div><div class="eyebrow">PREDICTION LAB / 02</div><h1>Análise de jogo</h1><p>Estimativa histórica experimental + Poisson / Dixon-Coles candidato.</p></div><span class="tag tag-amber">BETA</span></div>
+        <form id="analysisForm" class="panel form-panel">
+          <div class="form-title"><span class="step">01</span><div><b>Identificação do encontro</b><small>Dados introduzidos manualmente</small></div></div>
+          <div class="field"><label for="competition">COMPETIÇÃO</label><input id="competition" placeholder="Ex.: Primeira Liga" maxlength="60"></div>
+          <div class="two-col"><div class="field"><label for="homeTeam">EQUIPA CASA</label><input id="homeTeam" placeholder="Equipa da casa" required maxlength="60"></div><div class="field"><label for="awayTeam">EQUIPA FORA</label><input id="awayTeam" placeholder="Equipa visitante" required maxlength="60"></div></div>
+          <div class="form-title spaced"><span class="step">02</span><div><b>Parâmetros de golos esperados</b><small>Estimativas λ — não são dados observados</small></div></div>
+          <div class="two-col"><div class="field"><label for="lambdaHome">λ CASA</label><input id="lambdaHome" type="number" min="0.05" max="5" step="0.05" value="1.55" required><small>Golos esperados da equipa da casa</small></div><div class="field"><label for="lambdaAway">λ FORA</label><input id="lambdaAway" type="number" min="0.05" max="5" step="0.05" value="1.10" required><small>Golos esperados da equipa visitante</small></div></div>
+          <div class="form-title spaced"><span class="step">03</span><div><b>Estimativa automática com histórico</b><small>Importa resultados anteriores; a análise exclui jogos posteriores à data selecionada</small></div></div>
+          <div class="field"><label for="historyFile">HISTÓRICO CSV OU JSON (MÍNIMO 30 RESULTADOS)</label><input id="historyFile" type="file" accept=".csv,.json,text/csv,application/json"><small>CSV compatível: Date, HomeTeam, AwayTeam, FTHG, FTAG, opcional Div. Usa apenas resultados a 90 minutos.</small></div>
+          <div class="two-col"><button id="importHistory" class="secondary-btn" type="button">IMPORTAR HISTÓRICO</button><button id="estimateLambdas" class="secondary-btn" type="button">ESTIMAR λ AUTOMATICAMENTE</button></div>
+          <input id="analysisDate" type="hidden" value="">
+          <div id="historyEngineStatus" class="notice" hidden aria-live="polite"></div>
+          <div class="form-title spaced"><span class="step">04</span><div><b>Odds decimais (opcional)</b><small>Para cálculo de valor esperado</small></div></div>
+          <div class="three-col"><div class="field"><label for="odd1">ODD 1</label><input id="odd1" type="number" min="1.01" step="0.01" placeholder="2.10"></div><div class="field"><label for="oddX">ODD X</label><input id="oddX" type="number" min="1.01" step="0.01" placeholder="3.30"></div><div class="field"><label for="odd2">ODD 2</label><input id="odd2" type="number" min="1.01" step="0.01" placeholder="3.60"></div></div>
+          <button class="primary-btn" type="submit">CALCULAR PROBABILIDADES <span>↗</span></button>
+          <p class="microcopy">Cálculo local no dispositivo. Não utiliza odds ou estatísticas obtidas automaticamente.</p>
+        </form>
+        <div id="results" class="results" hidden aria-live="polite"></div>
+        <div class="panel validation-panel"><div class="form-title"><span class="step">05</span><div><b>Validação observacional</b><small>Regista resultados reais no Histórico para obter métricas descritivas</small></div></div><div id="validationSummary" class="notice">Sem resultados liquidados.</div></div>
+      </section>
+      <section id="page-history" class="page">
+        <div class="page-heading"><div><div class="eyebrow">LOCAL DATABASE / 03</div><h1>Histórico</h1><p>Registos guardados neste dispositivo.</p></div><button id="exportBtn" class="secondary-btn">EXPORTAR JSON ↓</button></div>
+        <div id="historyList" class="history-list"><div class="empty-state"><span>◷</span><b>Sem análises guardadas</b><small>As análises calculadas aparecem aqui.</small></div></div>
+        <button id="clearHistory" class="danger-btn">Apagar histórico local</button>
+      </section>
+      <section id="page-system" class="page">
+        <div class="page-heading"><div><div class="eyebrow">CONFIGURATION / 04</div><h1>Sistema</h1><p>Estado da aplicação e gestão dos dados.</p></div></div>
+        <div class="panel system-panel"><div class="system-row"><span>Aplicação</span><b> MHEC-1X2 PRO 2.0</b></div><div class="system-row"><span>Versão PWA</span><b>1.0.0 — Integrated Engine</b></div><div class="system-row"><span>Motor de previsão</span><b>Poisson / Dixon-Coles candidato</b></div><div class="system-row"><span>Persistência</span><b>IndexedDB</b></div><div class="system-row"><span>Modo offline</span><b id="offlineStatus">A verificar…</b></div><div class="system-row"><span>Sincronização</span><b>Open-Matchday · manual/12h</b></div></div>
+        <div class="notice"><b>Roadmap de desenvolvimento</b><ol><li>Importação local de resultados históricos CSV/JSON.</li><li>Força ofensiva/defensiva com separação casa/fora e shrinkage.</li><li>Estimativa λ temporal e Dixon-Coles candidato (ρ experimental).</li><li>Ensemble, calibração e incerteza.</li><li>Backtesting walk-forward e auditoria.</li></ol></div>
+        <div class="notice warning"><b>Privacidade e segurança</b><p>Os registos são guardados localmente no navegador. Limpar os dados do site pode apagá-los. Não introduza credenciais ou chaves API nesta versão.</p></div>
+      </section>
+    </main>
+    <footer><span>MHEC-1X2 PRO</span><span>ANALYTICS • NOT FINANCIAL ADVICE</span></footer>
+  </div>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="market-engine.js" defer></script>
+  <script src="validation-engine.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="history-engine.js" defer></script>
+  <script src="matches.js" defer></script>
+</body></html>
